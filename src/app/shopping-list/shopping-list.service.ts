@@ -1,4 +1,4 @@
-import { Injectable,EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable()
@@ -11,12 +11,16 @@ export class ShoppingListService {
 
   constructor() { }
 
-  getIngredients(){
+  getIngredients() {
     return this.ingredients; //Return copy of instance
   }
-
-  setIngredient(_ingredient: Ingredient){
+  setIngredient(_ingredient: Ingredient) {
       this.ingredients.push(_ingredient);
   }
-
+  setIngredients(_ingredients: Ingredient[]) {
+      for (const ingredient of _ingredients) {
+          this.ingredients.push(ingredient);
+      }
+      console.log(this.ingredients);
+  }
 }
