@@ -18,7 +18,6 @@ import {ShoppingListService} from "../shopping-list.service";
 export class ShoppingEditComponent implements OnInit {
   @ViewChild('nameInput') nameInputRef: ElementRef;
   @ViewChild('amountInput') amountInputRef: ElementRef;
-  @Output() ingredientAdded = new EventEmitter<Ingredient>();
 
   constructor(private _shoppingListService: ShoppingListService) { }
 
@@ -29,7 +28,7 @@ export class ShoppingEditComponent implements OnInit {
     const ingName = this.nameInputRef.nativeElement.value;
     const ingAmount = this.amountInputRef.nativeElement.value;
     const newIngredient = new Ingredient(ingName, ingAmount);
-      this._shoppingListService.ingredientAdded.emit(newIngredient);
+      this._shoppingListService.setIngredient(newIngredient);
   }
 
 }
