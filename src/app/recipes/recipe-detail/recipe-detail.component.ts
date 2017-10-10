@@ -1,18 +1,33 @@
+import { RecipesService } from './../recipes.service';
 import { Component, OnInit, Input } from '@angular/core';
 import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import { Recipe } from '../recipe.model';
 import {Ingredient} from '../../shared/ingredient.model';
+import {ActivatedRoute, Params} from '@angular/router';
+
+
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  @Input() recipe: Recipe;
-
-  constructor(private _shoppingListService: ShoppingListService) { }
+  private recipe: Recipe;
+  private id: number;
+  constructor(
+    private _shoppingListService: ShoppingListService,
+    private _recipesService: RecipesService,
+    private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    /*Track parameters change by async subscription*/
+    this._activatedRoute.params.subscribe(
+        /*Wait for data within callback*/
+        (_parameters: Params) => {
+          this.id = +_parameters['id'];
+          this.recipe = this._recipesService.getRecipe(this.id);
+        }
+    );
   }
 
   addIngrediebtsToShoppoingList() {

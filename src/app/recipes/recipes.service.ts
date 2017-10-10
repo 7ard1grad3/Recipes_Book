@@ -7,8 +7,9 @@ export class RecipesService {
   private recipes: Recipe[] = [
     new Recipe('Raspberry Bakewell cake',
         'This simple almondy cake is a great way of using up pick-your-own raspberries',
-        'https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe_images/recipe-image-legacy-id--559459_11.jpg?itok=Dg7CFR8B'
-        ,[
+        'https://www.bbcgoodfood.com/sites/default/files/styles' +
+        '/recipe/public/recipe_images/recipe-image-legacy-id--559459_11.jpg?itok=Dg7CFR8B'
+        , [
             new Ingredient('eggs', 2),
             new Ingredient('tsp vanilla extract', 1),
             new Ingredient('tbsp flaked almond', 2),
@@ -19,7 +20,7 @@ export class RecipesService {
           'One bite and youll see why this velvety beauty won first prize.' +
           'Sandra Johnson, Tioga, Pennsylvania',
           'https://cdn2.tmbi.com/TOH/Images/Photos/37/300x300/exps957_TH143195C09_04_4b.jpg'
-          ,[
+          , [
               new Ingredient('cup butter, softened', 1),
               new Ingredient('cups packed brown sugar', 3),
               new Ingredient('large eggs', 4),
@@ -28,8 +29,12 @@ export class RecipesService {
   ];
   constructor() { }
 
-  getRecipes(){
-    return this.recipes.slice(); //Will return copy of array because of slice method
+  getRecipes() {
+    return this.recipes.slice(); // Will return copy of array because of slice method
+  }
+
+  getRecipe(id: number) {
+    return this.recipes[id]; // Will return copy of array because of slice method
   }
 
 }
