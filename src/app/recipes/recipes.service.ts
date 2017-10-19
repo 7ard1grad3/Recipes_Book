@@ -1,8 +1,10 @@
+import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 @Injectable()
 export class RecipesService {
+  recipeChanged = new Subject<Recipe[]>();
   private recipes: Recipe[] = [
     new Recipe('Raspberry Bakewell cake',
         'This simple almondy cake is a great way of using up pick-your-own raspberries',
@@ -29,11 +31,26 @@ export class RecipesService {
   constructor() { }
 
   getRecipes() {
-    return this.recipes.slice(); // Will return copy of array because of slice method
+    return this.recipes; // Will return copy of array because of slice method
   }
 
   getRecipe(id: number) {
     return this.recipes[id]; // Will return copy of array because of slice method
+  }
+
+  addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.recipeChanged.next(this.recipes.slice());
+  }
+
+  updateRecipe(index: number, recipe: Recipe) {
+    this.recipes[index] = recipe;
+    this.recipeChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1); // Remove index then as second parameter is the number of elements to remove
+    this.recipeChanged.next(this.recipes.slice());
   }
 
 }

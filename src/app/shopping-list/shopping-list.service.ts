@@ -29,8 +29,12 @@ export class ShoppingListService {
       this.ingredients.push(..._ingredients); // 3 dots separates objects to single object
       this.ingredientAdded.next(this.ingredients);
   }
-  updateingredient(index: number, newIgredient: Ingredient) {
+  updateIngredient(index: number, newIgredient: Ingredient) {
     this.ingredients[index] = newIgredient;
+    this.ingredientAdded.next(this.ingredients.slice());
+  }
+  deleteIngredient(index: number) {
+    this.ingredients.splice(index, 1); // Remove index then as second parameter is the number of elements to remove
     this.ingredientAdded.next(this.ingredients.slice());
   }
 }

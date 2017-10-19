@@ -61,7 +61,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       const name = this.itemForm.get('name').value;
       const amount = +this.itemForm.get('amount').value; // This number have to be custed from string to number
       if (this.editMode) {
-        this._shoppingListService.updateingredient(this.editingItemIndex, new Ingredient(name, amount));
+        this._shoppingListService.updateIngredient(this.editingItemIndex, new Ingredient(name, amount));
       }else {
         this._shoppingListService.setIngredient(new Ingredient(name, amount));
       }
@@ -72,6 +72,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   onResetForm() {
     this.editMode = false;
     this.itemForm.reset();
+  }
+
+  onDelete() {
+    this._shoppingListService.deleteIngredient(this.editingItemIndex);
+    this.onResetForm();
   }
 
 }

@@ -1,0 +1,6 @@
+hr { margin: 2px 0 4px 0; }
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+    border: 1px solid rgba(255, 72, 0, 0.657);
+}

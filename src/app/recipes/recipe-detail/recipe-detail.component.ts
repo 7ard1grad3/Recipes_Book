@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import { Recipe } from '../recipe.model';
 import {Ingredient} from '../../shared/ingredient.model';
-import {ActivatedRoute, Params} from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +17,8 @@ export class RecipeDetailComponent implements OnInit {
   constructor(
     private _shoppingListService: ShoppingListService,
     private _recipesService: RecipesService,
-    private _activatedRoute: ActivatedRoute) { }
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router) { }
 
   ngOnInit() {
     /*Track parameters change by async subscription*/
@@ -32,6 +33,10 @@ export class RecipeDetailComponent implements OnInit {
 
   addIngrediebtsToShoppoingList() {
       this._shoppingListService.setIngredients(this.recipe.ingredients);
+  }
+  deleteRecipe(id: number) {
+    this._recipesService.deleteRecipe(id);
+    this._router.navigate(['../'], {relativeTo: this._activatedRoute});
   }
 
 }

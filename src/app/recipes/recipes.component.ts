@@ -7,7 +7,7 @@ import {RecipesService} from './recipes.service';
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css'],
   // By adding service as provider, all child components will share same instace
-  providers: [RecipesService]
+  providers: []
 })
 
 export class RecipesComponent implements OnInit {
