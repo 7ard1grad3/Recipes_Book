@@ -1,3 +1,4 @@
+import { DataStorageService } from './shared/data-storage.service';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -45,7 +46,7 @@ import { RecipesService } from './recipes/recipes.service';
     MdCardModule,
     AppRoutingModule
   ],
-  providers: [ShoppingListService, RecipesService],
+  providers: [ShoppingListService, RecipesService, DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

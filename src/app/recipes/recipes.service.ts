@@ -2,8 +2,10 @@ import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
+
 @Injectable()
 export class RecipesService {
+  private URL = 'https://ng-recipebook-79c34.firebaseio.com/';
   recipeChanged = new Subject<Recipe[]>();
   private recipes: Recipe[] = [
     new Recipe('Raspberry Bakewell cake',
@@ -45,6 +47,11 @@ export class RecipesService {
 
   updateRecipe(index: number, recipe: Recipe) {
     this.recipes[index] = recipe;
+    this.recipeChanged.next(this.recipes.slice());
+  }
+
+  updateRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
     this.recipeChanged.next(this.recipes.slice());
   }
 
