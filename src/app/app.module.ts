@@ -1,3 +1,5 @@
+import { AuthGuard } from './auth/auth-guard.service';
+import { AuthService } from './auth/auth.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,6 +23,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipesService } from './recipes/recipes.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,9 @@ import { RecipesService } from './recipes/recipes.service';
     DropdownDirective,
     PageNotFoundComponent,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +52,7 @@ import { RecipesService } from './recipes/recipes.service';
     MdCardModule,
     AppRoutingModule
   ],
-  providers: [ShoppingListService, RecipesService, DataStorageService],
+  providers: [ShoppingListService, RecipesService, DataStorageService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
