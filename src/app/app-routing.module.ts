@@ -1,4 +1,5 @@
-import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './auth/auth-guard.service';
+import { HomeComponent } from './core/home/home.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
@@ -10,13 +11,16 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 /* Creating a list of routes */
 
 const appRoutes: Routes =
 [
     { path: '', component: HomeComponent, pathMatch: 'full'},
-    { path: 'recipes', loadChildren: './recipes/recipe.module#RecipeModule'} // Because of string path, lazy loading will be loaded
+    { path: 'recipes'
+    , loadChildren: './recipes/recipe.module#RecipeModule'
+    , canActivate: [AuthGuard]
+    } // Because of string path, lazy loading will be loaded
     // { path: '404', component: PageNotFoundComponent},
     // { path: '404', component: PageNotFoundComponent, data: {message: 'Page not found!'}},
     // { path: '**', redirectTo: '/404'} // ** must be in the end of routes
@@ -25,7 +29,7 @@ const appRoutes: Routes =
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})
   ],
   exports: [
     RouterModule

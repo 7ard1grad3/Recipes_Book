@@ -12,8 +12,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  private recipe: Recipe;
-  private id: number;
+  recipe: Recipe;
+  id: number;
   constructor(
     private _shoppingListService: ShoppingListService,
     private _recipesService: RecipesService,
@@ -34,8 +34,12 @@ export class RecipeDetailComponent implements OnInit {
   addIngrediebtsToShoppoingList() {
       this._shoppingListService.setIngredients(this.recipe.ingredients);
   }
-  deleteRecipe(id: number) {
-    this._recipesService.deleteRecipe(id);
+  onEditRecipe() {
+    this._router.navigate(['edit'], {relativeTo: this._activatedRoute});
+    // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
+  }
+  deleteRecipe() {
+    this._recipesService.deleteRecipe(this.id);
     this._router.navigate(['../'], {relativeTo: this._activatedRoute});
   }
 

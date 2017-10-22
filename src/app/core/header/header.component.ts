@@ -1,7 +1,7 @@
-import { AuthService } from '../auth/auth.service';
-import { Recipe } from './../recipes/recipe.model';
-import { RecipesService } from '../recipes/recipes.service';
-import { DataStorageService } from '../shared/data-storage.service';
+import { AuthService } from '../../auth/auth.service';
+import { Recipe } from '../../recipes/recipe.model';
+import { RecipesService } from '../../recipes/recipes.service';
+import { DataStorageService } from '../../shared/data-storage.service';
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
@@ -12,7 +12,7 @@ export class HeaderComponent {
   constructor(
     private _dataStorageService: DataStorageService
     , private _recipesService: RecipesService
-    , private _auth: AuthService) {
+    , public _auth: AuthService) {
 
   }
   onSave() {

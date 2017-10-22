@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class AuthGuard implements CanActivate {
 
   constructor(private _authService: AuthService) { }
-  canActivate(router: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(router: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     return this._authService.isAuthenticated();
   }
 
