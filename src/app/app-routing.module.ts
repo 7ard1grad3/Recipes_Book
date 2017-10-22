@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
@@ -10,27 +11,17 @@ import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { SignupComponent } from './auth/signup/signup.component';
-import { AuthGuard } from './auth/auth-guard.service';
 /* Creating a list of routes */
 
 const appRoutes: Routes =
 [
-    { path: '', redirectTo: '/recipes', pathMatch: 'full'},
-    { path: 'recipes', component: RecipesComponent, children:
-    [
-      { path: '', component: RecipeStartComponent, pathMatch: 'full' },
-      { path: 'new', component: RecipeEditComponent, canActivate: [AuthGuard] },
-      { path: ':id', component: RecipeDetailComponent },
-      { path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuard] },
-    ] },
-    { path: 'shopping_list', component: ShoppingListComponent},
-    { path: 'signup', component: SignupComponent},
-    { path: 'signin', component: SigninComponent},
+    { path: '', component: HomeComponent, pathMatch: 'full'},
+    { path: 'recipes', loadChildren: './recipes/recipe.module#RecipeModule'} // Because of string path, lazy loading will be loaded
     // { path: '404', component: PageNotFoundComponent},
-    { path: '404', component: PageNotFoundComponent, data: {message: 'Page not found!'}},
-    { path: '**', redirectTo: '/404'} // ** must be in the end of routes
+    // { path: '404', component: PageNotFoundComponent, data: {message: 'Page not found!'}},
+    // { path: '**', redirectTo: '/404'} // ** must be in the end of routes
 ];
+
 
 @NgModule({
   imports: [
