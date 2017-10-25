@@ -1,3 +1,4 @@
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { AuthService } from '../../auth/auth.service';
 import { Recipe } from '../../recipes/recipe.model';
 import { RecipesService } from '../../recipes/recipes.service';
@@ -17,7 +18,8 @@ export class HeaderComponent {
   }
   onSave() {
     this._dataStorageService.storeRecipes().subscribe(
-      (resposne) => {
+      (resposne: HttpEvent<object>) => {
+        console.log(resposne.type === HttpEventType.Sent);
         console.log(resposne);
       },
       (error) => {
